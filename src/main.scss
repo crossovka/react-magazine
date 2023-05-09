@@ -1,0 +1,39 @@
+// обнуление
+@import "null.scss";
+
+// переменные и переиспользование по bem
+@import "vars.scss";
+
+// ограничивающие контейнеры
+@import "containers.scss";
+
+/*  -------- блоки на сайте --------------  */
+
+
+/*  ---------------------------------------  */
+
+html,
+body {
+	font-family: $font-family;
+
+	font-size: 16px;
+
+	color: $primary-f-color;
+
+	background-color: $main-bgc-color;
+
+	// overflow: hidden;
+}
+.wrapper {
+	overflow: hidden;
+
+	display: flex;
+	flex-direction: column;
+
+	min-height: 100vh;
+	// overflow-x: hidden;
+}
+main {
+	flex: 1 1 auto;
+	// прижал footer у низу
+}
