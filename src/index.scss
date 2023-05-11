@@ -12,6 +12,10 @@ body {
 	color: $primary-f-color;
 
 	background-color: $main-bgc-color;
+
+	&__no-scroll{
+		overflow: hidden;
+	}
 }
 .wrapper {
 	margin: 5% 10%;
@@ -52,8 +56,8 @@ body {
 }
 
 .overlay {
-	position: absolute;
-
+	// position: absolute;
+	position: fixed;
 	top: 0;
 	left: 0;
 
@@ -261,9 +265,10 @@ body {
 	&__products {
 		@include ui-space(top, 10);
 
-		display: flex;
-		flex-direction: row;
-		flex-wrap: wrap;
+		display: grid;
+		grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+		gap: 20px;
+		justify-items: center;
 	}
 }
 .title-block {
@@ -283,8 +288,6 @@ body {
 .products {
 	&__card {
 		width: 220px;
-
-		@include ui-space(right, 7.5);
 
 		padding: 20px;
 
