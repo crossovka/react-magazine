@@ -259,6 +259,7 @@ body {
 		align-items: center;
 
 		h1 {
+			@include adaptive-font(30, 16);
 			font-weight: $extra-bold-weight;
 		}
 	}
