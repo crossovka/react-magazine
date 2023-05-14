@@ -1,0 +1,58 @@
+@import "../../vars.scss";
+
+.header {
+	// @include ui-space(top, 10);
+
+	border-bottom: 2px solid #eaeaea;
+
+	&__header-inner {
+		display: flex;
+
+		justify-content: space-between;
+
+		padding: 40px;
+	}
+}
+.header-inner {
+	&__header-left {
+		display: flex;
+
+		align-items: center;
+		img {
+			@include ui-space(right, 4);
+
+			display: block;
+
+			max-width: 40px;
+			height: auto;
+		}
+		h3 {
+			text-transform: uppercase;
+
+			font-weight: $bold-weight;
+		}
+	}
+
+	&__header-right {
+		display: flex;
+
+		align-items: center;
+
+		&::before {
+			content: "";
+			display: block;
+			margin-right: -12px;
+		}
+
+		li {
+			@include ui-space(left, 4);
+		}
+
+		img {
+			display: block;
+
+			max-width: 20px;
+			height: auto;
+		}
+	}
+}

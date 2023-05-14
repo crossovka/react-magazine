@@ -1,3 +1,5 @@
+import './Drawer.scss';
+
 function Overlay() {
 	return (
 		<div className="overlay" style={{ display: 'none' }}>

@@ -1,0 +1,141 @@
+@import "../../vars.scss";
+
+.overlay {
+	// position: absolute;
+	position: fixed;
+	top: 0;
+	left: 0;
+
+	width: 100%;
+	height: 100%;
+
+	background-color: rgba(0, 0, 0, 0.5);
+
+	z-index: $ui-index-6;
+	&__drawer {
+		position: absolute;
+		right: 0;
+
+		width: 500px;
+		height: 100%;
+
+		padding: 30px;
+
+		display: flex;
+		flex-direction: column;
+		// justify-content: space-around;
+
+		background: $optional-bgc-color;
+
+		box-shadow: -10px 4px 24px rgba(0, 0, 0, 0.01);
+	}
+}
+.drawer {
+	&__items {
+		flex: 1;
+
+		overflow: auto;
+	}
+	&__total {
+		li {
+			@include ui-space(top, 5);
+
+			display: flex;
+			align-items: flex-end;
+		}
+		.button {
+			@include ui-space(top, 6);
+
+			&:hover {
+				img {
+					transform: translateX(5px);
+				}
+			}
+
+			img {
+				position: absolute;
+				right: 55px;
+
+				transition: transform 0.15s ease-in-out;
+			}
+		}
+	}
+	&__drawer-title {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+
+		h2 {
+			@include adaptive-font(25, 16);
+			font-weight: $extra-bold-weight;
+			text-transform: capitalize;
+		}
+		button {
+			height: 100%;
+			width: 40px;
+			background: transparent;
+			img{
+				width: 100%;
+				height: auto;
+				object-fit: cover;
+				object-position: center;
+
+				transition: all 0.3s ease-in-out;
+				&:hover {
+					transform: rotate(15deg);
+				}
+			}
+		}
+	}
+}
+.total__dash {
+	@include ui-space((left, right), 2);
+
+	flex: 1;
+
+	position: relative;
+	top: -4px;
+
+	height: 1px;
+	border: 1px dashed;
+}
+.items__cart-item {
+	@include ui-space(top, 5);
+
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+
+	border: 1px solid #f3f3f3;
+	border-radius: 20px;
+
+	overflow: hidden;
+}
+.cart-item {
+	&__img {
+		width: 100%;
+		height: 150px;
+
+		display: flex;
+		justify-content: center;
+	}
+	&__description {
+		@include ui-space(left, 5);
+		p {
+			@include ui-space(bottom, 2);
+		}
+	}
+	&__remove {
+		@include ui-space(left, 2);
+		@include ui-space(right, 2);
+
+		@include ui-opacity(5);
+
+		cursor: pointer;
+
+		transition: opacity 0.15s ease-in-out;
+		&:hover {
+			@include ui-opacity(10);
+		}
+	}
+}

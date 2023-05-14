@@ -1,0 +1,57 @@
+@import "../../vars.scss";
+
+.products {
+	&__card {
+		width: 220px;
+
+		padding: 20px;
+
+		border: 1px solid #f8e8f8;
+		border-radius: 40px;
+
+		span {
+			text-transform: uppercase;
+			@include ui-opacity(5);
+		}
+
+		transition: box-shadow 0.2s ease-in-out, transform 0.2s ease-in-out;
+		&:hover {
+			box-shadow: 0px 20px 35px rgba(0, 0, 0, 0.06);
+			transform: translateY(-5px);
+		}
+	}
+}
+.card {
+	&__bottom {
+		@include ui-space(top, 4);
+
+		display: flex;
+		justify-content: space-between;
+
+		.bottom__price {
+			display: flex;
+			flex-direction: column;
+		}
+	}
+
+	&__img {
+		width: 100%;
+		height: 150px;
+
+		display: flex;
+		justify-content: center;
+
+		img {
+		}
+	}
+
+	&__favorite {
+		position: absolute;
+
+		cursor: pointer;
+	}
+}
+
+.add-product-btn {
+	background: transparent;
+}
