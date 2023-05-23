@@ -1,3 +1,5 @@
+import React from 'react';
+
 import Drawer from './compontents/Drawer';
 import Shapka from './compontents/Header';
 import Card from './compontents/Card';
@@ -116,8 +118,23 @@ const arr = [
 ];
 
 function App() {
+	const [count, setCount] = React.useState(5);
+
+	const plus = () => {
+		setCount(8);
+	};
+
+	const minus = () => {
+
+	};
+
 	return (
 		<div className="wrapper">
+			<div style={{width:'100%', display:'flex', justifyContent:'center', alignItems:'center', height:'200px'}}>
+				<h1>{setCount}</h1>
+				<button onClick={plus}>+</button>
+				<button onClick={minus}>-</button>
+			</div>
 			<Drawer />
 
 			<Shapka />
@@ -161,15 +178,15 @@ function App() {
 
 							{/* пробегаюсь по массиву и преобразую каждый объект в реакт компонент */}
 							{arr.map((obj) => (
-
-								<Card 
-								name={obj.name} 
-								price={obj.price} 
-								imageUrl={obj.imageUrl}
-								onClickFavorite={() => alert(obj.name + " Добавлены в избранное")}
-								onClickPlus={() => alert(obj.name + " Добавлены в избранное")}
+								<Card
+									name={obj.name}
+									price={obj.price}
+									imageUrl={obj.imageUrl}
+									onClickFavorite={() =>
+										alert(obj.name + ' Добавлены в избранное')
+									}
+									onClickPlus={() => alert(obj.name + ' Добавлены в избранное')}
 								/>
-
 							))}
 						</div>
 					</div>
