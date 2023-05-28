@@ -1,13 +1,13 @@
 import './Drawer.scss';
 
-function Overlay() {
+function Overlay(props) {
 	return (
-		<div className="overlay" style={{ display: 'none' }}>
+		<div className="overlay">
 			<div className="overlay__drawer">
 				<div className="drawer__drawer-title">
 					<h2>корзина</h2>
 					<button className="drawer-title__close-btn">
-						<img src="/img/close-btn.svg" alt="закрыть" />
+						<img src="/img/close-btn.svg" alt="закрыть" onClick={props.onClose}/>
 					</button>
 				</div>
 				<div className="drawer__items">

@@ -1,6 +1,6 @@
 import './Header.scss';
 
-function Header() {
+function Header(props) {
 	return (
 		<header className="header">
 			<div className="header__container">
@@ -15,8 +15,8 @@ function Header() {
 					</div>
 
 					<ul className="header-inner__header-right">
-						<li>
-							<img width={40} height={40} src="/img/cart.svg" alt="корзина" />
+						<li onClick={props.onClickCart} >
+							<img src="/img/cart.svg" alt="корзина" />
 						</li>
 						<li>
 							<span> 12990 ₽ </span>

@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import './Card.scss';
 
 // import styles from './Card.module.scss'
@@ -6,6 +8,22 @@ import './Card.scss';
 // CSS MODULES ПОДХОД ГУГЛИ ЕС ПЕРЕХОЧЕШЬ ЮЗАТЬ BEM
 
 function Card(props) {
+	const [isAdded, setIsAdded] = useState(false);
+
+
+	const addButtonImage = '/img/btn-plus.svg';
+	const checkedButtonImage = '/img/btn-cheked.svg';
+	
+	const getButtonImage = () => {
+		return isAdded ? checkedButtonImage : addButtonImage;
+	};
+
+	const onClickPlus = () => {
+		// булево значение инвертируется
+		setIsAdded(!isAdded);
+		// alert(props.name + ' Добавлены в избранное')
+	}
+
 	return (
 		<div className="products__card">
 			<div className="card__favorite" onClick={props.onClickFavorite}>
@@ -21,8 +39,8 @@ function Card(props) {
 					<span> Цена: </span>
 					<b> {props.price} </b>
 				</div>
-				<button className="add-product-btn" onClick={props.onClickPlus}>
-					<img src="/img/btn-plus.svg" alt="добавить товар"/>
+				<button className="add-product-btn" onClick={onClickPlus}>
+					<img src={getButtonImage()} alt="добавить товар"/>
 				</button>
 			</div>
 		</div>

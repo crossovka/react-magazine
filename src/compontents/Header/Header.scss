@@ -46,6 +46,8 @@
 
 		li {
 			@include ui-space(left, 4);
+			
+			cursor: pointer;
 		}
 
 		img {

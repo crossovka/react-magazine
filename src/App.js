@@ -4,140 +4,70 @@ import Drawer from './compontents/Drawer';
 import Shapka from './compontents/Header';
 import Card from './compontents/Card';
 
-const arr = [
-	{
-		name: 'Микраховские говнодавы',
-		price: 1999,
-		imageUrl: '/img/products/2.webp',
-	},
-	{
-		name: 'говнодавы',
-		price: 99,
-		imageUrl: '/img/products/3.webp',
-	},
-	{
-		name: 'Микраховские',
-		price: 19,
-		imageUrl: '/img/products/4.webp',
-	},
-	{
-		name: 'Микраховские',
-		price: 19,
-		imageUrl: '/img/products/4.webp',
-	},
-	{
-		name: 'Микраховские',
-		price: 19,
-		imageUrl: '/img/products/4.webp',
-	},
-	{
-		name: 'Микраховские',
-		price: 19,
-		imageUrl: '/img/products/4.webp',
-	},
-	{
-		name: 'Микраховские',
-		price: 19,
-		imageUrl: '/img/products/4.webp',
-	},
-	{
-		name: 'Микраховские',
-		price: 19,
-		imageUrl: '/img/products/4.webp',
-	},
-	{
-		name: 'Микраховские',
-		price: 19,
-		imageUrl: '/img/products/4.webp',
-	},
-	{
-		name: 'Микраховские',
-		price: 19,
-		imageUrl: '/img/products/4.webp',
-	},
-	{
-		name: 'Микраховские',
-		price: 19,
-		imageUrl: '/img/products/4.webp',
-	},
-	{
-		name: 'Микраховские',
-		price: 19,
-		imageUrl: '/img/products/4.webp',
-	},
-	{
-		name: 'Микраховские',
-		price: 19,
-		imageUrl: '/img/products/4.webp',
-	},
-	{
-		name: 'Микраховские',
-		price: 19,
-		imageUrl: '/img/products/4.webp',
-	},
-	{
-		name: 'Микраховские',
-		price: 19,
-		imageUrl: '/img/products/4.webp',
-	},
-	{
-		name: 'Микраховские',
-		price: 19,
-		imageUrl: '/img/products/4.webp',
-	},
-	{
-		name: 'Микраховские',
-		price: 19,
-		imageUrl: '/img/products/4.webp',
-	},
-	{
-		name: 'Микраховские',
-		price: 19,
-		imageUrl: '/img/products/4.webp',
-	},
-	{
-		name: 'Микраховские',
-		price: 19,
-		imageUrl: '/img/products/4.webp',
-	},
-	{
-		name: 'Микраховские',
-		price: 19,
-		imageUrl: '/img/products/4.webp',
-	},
-	{
-		name: 'Микраховские',
-		price: 19,
-		imageUrl: '/img/products/4.webp',
-	},
-	{
-		name: 'Микраховские',
-		price: 19,
-		imageUrl: '/img/products/4.webp',
-	},
-];
+// const [isLoading, setIsLoading] = React.useState(true);
+// 	const [items, setItems] = React.useState([]);
+
+// 	const fetchPosts = () => {
+// 		setIsLoading(true);
+// 		axios
+// 			.get('https://6422645e86992901b2c711ab.mockapi.io/post')
+// 			// в момент,когда получу ответ от бэкэнда с помощью деструктуризации вытащить data
+// 			// и поместить его в set items
+// 			.then(({ data }) => {
+// 				setItems(data);
+// 			})
+// 			.catch((err) => {
+// 				console.log(err);
+// 				// Сверху импортировал Alert
+// 				Alert.alert('ААА ОШИБКА', 'Не удалось получить статьи');
+// 				// Alert.conform()
+// 				// alert('ошибка при получении статей');
+// 			})
+// 			.finally(() => {
+// 				setIsLoading(false);
+// 			});
+// 	};
+
+// 	// говорю,что во время первого рендера мне необходимо отправить запрос на бэкэнд.позже я все это вынес в отдельную функцию сверху
+// 	React.useEffect(fetchPosts, []);
+
+// 	// Пустой массив обозначет, что  что эффект будет запускаться только один раз, при монтировании компонента. Без этого массива,
+// 	// useEffect будет вызываться при каждом рендере компонента, что может вызвать проблемы с производительностью.
+
+// 	// елси идет загрузка,то необходимо использовать View с ActivityIndicator
+// 	if (isLoading) {
+// 		return <Loading />;
+// 	}
 
 function App() {
-	const [count, setCount] = React.useState(5);
+	const [cartOpened, setCartOpened] = React.useState(false);
+	const [items, setItems] = React.useState([]);
+	
+	// если в useState хоть что-то обновляется, то функциональный компонент вызывается снова! useEffect фиксит
+	// тобишь вызывается ток при первом рендере(пустой массив) ес стэйты обновляются, то снова не фетчится
+	React.useEffect(() => {
+		fetch(' https://6422645e86992901b2c711ab.mockapi.io/react-magazine')
+		.then((res) => {
+			return res.json();
+		})
+		.then((json) => {
+			setItems(json);
+		})
+	}, []);
 
-	const plus = () => {
-		setCount(8);
-	};
-
-	const minus = () => {
-
-	};
+	function renderDrawer() {
+		if (cartOpened) {
+			return <Drawer onClose={() => setCartOpened(false)} />;
+		}
+		return null;
+	}
 
 	return (
 		<div className="wrapper">
-			<div style={{width:'100%', display:'flex', justifyContent:'center', alignItems:'center', height:'200px'}}>
-				<h1>{setCount}</h1>
-				<button onClick={plus}>+</button>
-				<button onClick={minus}>-</button>
-			</div>
-			<Drawer />
+			{renderDrawer()}
+			{/* {cartOpened && <Drawer onClose={() => setCartOpened(false)} />} */}
 
-			<Shapka />
+			<Shapka onClickCart={() => setCartOpened(true)} />
 
 			<main className="main">
 				<div class="main__container">
@@ -151,33 +81,8 @@ function App() {
 						</div>
 
 						<div className="content__products">
-							<div className="products__card">
-								<div className="card__favorite">
-									<img src="/img/liked.svg" alt="лайкнуть товар" />
-								</div>
-								<div className="card__img">
-									<img src="/img/products/1.webp" alt="" />
-								</div>
-								<p> Мега крутая микраховская футболка </p>
-
-								<div className="card__bottom">
-									<div className="bottom__price">
-										<span> Цена: </span>
-										<b> 12990 ₽ </b>
-									</div>
-									<button className="add-product-btn">
-										<img
-											width={12}
-											height={12}
-											src="/img/btn-cheked.svg"
-											alt="добавить товар"
-										/>
-									</button>
-								</div>
-							</div>
-
 							{/* пробегаюсь по массиву и преобразую каждый объект в реакт компонент */}
-							{arr.map((obj) => (
+							{items.map((obj) => (
 								<Card
 									name={obj.name}
 									price={obj.price}
@@ -185,7 +90,6 @@ function App() {
 									onClickFavorite={() =>
 										alert(obj.name + ' Добавлены в избранное')
 									}
-									onClickPlus={() => alert(obj.name + ' Добавлены в избранное')}
 								/>
 							))}
 						</div>
