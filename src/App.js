@@ -58,7 +58,10 @@ function App() {
 	}, []);
 
 	const onAddToCart = (obj) => {
-		alert(obj.name + 'Кликнули на плюс');
+		// к стаым данным добавляю новый объект, чтобы избежать муации данных
+		// setCartItems([...cartItems,  obj]);
+		// созадй новый массив, возми предЪидущие данные, добавь объект верни новый массив и сохрани его в cartItems(эта функция не сохраняется там)
+		setCartItems((prev) => [...prev, obj]);
 	}
 
 	function renderDrawer() {
@@ -88,15 +91,15 @@ function App() {
 
 						<div className="content__products">
 							{/* пробегаюсь по массиву и преобразую каждый объект в реакт компонент */}
-							{items.map((obj) => (
+							{items.map((item) => (
 								<Card
-									name={obj.name}
-									price={obj.price}
-									imageUrl={obj.imageUrl}
+									name={item.name}
+									price={item.price}
+									imageUrl={item.imageUrl}
 									onClickFavorite={() =>
-										alert(obj.name + ' Добавлены в избранное')
+										alert(item.name + ' Добавлены в избранное')
 									}
-									onPlus={() => onAddToCart(obj)}
+									onPlus={(obj) => onAddToCart(obj)}
 								/>
 							))}
 						</div>

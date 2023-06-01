@@ -19,7 +19,7 @@ function Card( { imageUrl, name, price, onClickFavorite, onPlus  } ) {
 	};
 
 	const onClickPlus = () => {
-		// onPlus();
+		onPlus( {imageUrl, name, price,} );
 		// булево значение инвертируется
 		setIsAdded(!isAdded);
 		// alert(props.name + ' Добавлены в избранное')
