@@ -2,7 +2,7 @@ import './Drawer.scss';
 
 function Overlay( {onClose, items=[] } ) {
 	return (
-		<div className="overlay" onClick={onClose}>
+		<div className="overlay">
 			<div className="overlay__drawer">
 				<div className="drawer__drawer-title">
 					<h2>корзина</h2>
