@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 import Drawer from './compontents/Drawer';
 import Shapka from './compontents/Header';
@@ -42,10 +42,12 @@ import Card from './compontents/Card';
 function App() {
 	const [cartOpened, setCartOpened] = React.useState(false);
 	const [items, setItems] = React.useState([]);
+	const [cartItems, setCartItems] = React.useState([]);
 	
 	// если в useState хоть что-то обновляется, то функциональный компонент вызывается снова! useEffect фиксит
 	// тобишь вызывается ток при первом рендере(пустой массив) ес стэйты обновляются, то снова не фетчится
 	React.useEffect(() => {
+		// отправь запрос на бэк преврати в json и верни его из переменной и передай в юз стэйт в айтемс и ниже айтемс рендери
 		fetch(' https://6422645e86992901b2c711ab.mockapi.io/react-magazine')
 		.then((res) => {
 			return res.json();
@@ -55,9 +57,13 @@ function App() {
 		})
 	}, []);
 
+	const onAddToCart = (obj) => {
+		alert(obj.name + 'Кликнули на плюс');
+	}
+
 	function renderDrawer() {
 		if (cartOpened) {
-			return <Drawer onClose={() => setCartOpened(false)} />;
+			return <Drawer items={cartItems} onClose={() => setCartOpened(false)} />;
 		}
 		return null;
 	}
@@ -90,6 +96,7 @@ function App() {
 									onClickFavorite={() =>
 										alert(obj.name + ' Добавлены в избранное')
 									}
+									onPlus={() => onAddToCart(obj)}
 								/>
 							))}
 						</div>

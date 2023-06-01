@@ -1,23 +1,25 @@
 import './Drawer.scss';
 
-function Overlay(props) {
+function Overlay( {onClose, items=[] } ) {
 	return (
 		<div className="overlay">
 			<div className="overlay__drawer">
 				<div className="drawer__drawer-title">
 					<h2>корзина</h2>
 					<button className="drawer-title__close-btn">
-						<img src="/img/close-btn.svg" alt="закрыть" onClick={props.onClose}/>
+						<img src="/img/close-btn.svg" alt="закрыть" onClick={onClose}/>
 					</button>
 				</div>
 				<div className="drawer__items">
+				{items.map((obj) => (
 					<div className="items__cart-item">
 						<div className="cart-item__img">
-							<img src="/img/products/1.webp" alt="фото товара" />
+							{/* style={{backgroundImage: `url(${obj.imageUrl})`}} */}
+							<img src={obj.imageUrl} alt="фото товара" />
 						</div>
 						<div className="cart-item__description">
-							<p>Мега крутая микраховская футболка</p>
-							<b>12 990</b>
+							<p>{obj.name}</p>
+							<b>{obj.price}</b>
 						</div>
 						<img
 							className="cart-item__remove"
@@ -25,34 +27,7 @@ function Overlay(props) {
 							alt="убрать"
 						/>
 					</div>
-					<div className="items__cart-item">
-						<div className="cart-item__img">
-							<img src="/img/products/2.webp" alt="фото товара" />
-						</div>
-						<div className="cart-item__description">
-							<p>Мега крутая микраховская футболка</p>
-							<b>12 990</b>
-						</div>
-						<img
-							className="cart-item__remove"
-							src="/img/btn-remove.svg"
-							alt="убрать"
-						/>
-					</div>
-					<div className="items__cart-item">
-						<div className="cart-item__img">
-							<img src="/img/products/3.webp" alt="фото товара" />
-						</div>
-						<div className="cart-item__description">
-							<p>Мега крутая микраховская футболка</p>
-							<b>12 990</b>
-						</div>
-						<img
-							className="cart-item__remove"
-							src="/img/btn-remove.svg"
-							alt="убрать"
-						/>
-					</div>
+				))}
 				</div>
 				<div className="drawer__total">
 					<ul>

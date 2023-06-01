@@ -7,7 +7,7 @@ import './Card.scss';
 {/* <div className={styles.products__card}></div> */}
 // CSS MODULES ПОДХОД ГУГЛИ ЕС ПЕРЕХОЧЕШЬ ЮЗАТЬ BEM
 
-function Card(props) {
+function Card( { imageUrl, name, price, onClickFavorite, onPlus  } ) {
 	const [isAdded, setIsAdded] = useState(false);
 
 
@@ -19,6 +19,7 @@ function Card(props) {
 	};
 
 	const onClickPlus = () => {
+		// onPlus();
 		// булево значение инвертируется
 		setIsAdded(!isAdded);
 		// alert(props.name + ' Добавлены в избранное')
@@ -26,18 +27,18 @@ function Card(props) {
 
 	return (
 		<div className="products__card">
-			<div className="card__favorite" onClick={props.onClickFavorite}>
+			<div className="card__favorite" onClick={onClickFavorite}>
 				<img src="/img/unliked.svg" alt="лайкнуть товар" />
 			</div>
 			<div className="card__img">
-				<img src={props.imageUrl} alt="" />
+				<img src={imageUrl} alt="" />
 			</div>
-			<p> {props.name} </p>
+			<p> {name} </p>
 
 			<div className="card__bottom">
 				<div className="bottom__price">
 					<span> Цена: </span>
-					<b> {props.price} </b>
+					<b> {price} </b>
 				</div>
 				<button className="add-product-btn" onClick={onClickPlus}>
 					<img src={getButtonImage()} alt="добавить товар"/>
