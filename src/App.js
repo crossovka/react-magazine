@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 import Drawer from './compontents/Drawer';
 import Shapka from './compontents/Header';
@@ -13,15 +14,28 @@ function App() {
 
 	// если в useState хоть что-то обновляется, то функциональный компонент вызывается снова! useEffect фиксит
 	// тобишь вызывается ток при первом рендере(пустой массив) ес стэйты обновляются, то снова не фетчится
+	// React.useEffect(() => {
+	// 	axios.get('https://6422645e86992901b2c711ab.mockapi.io/tems').then(res => {
+	// 		setItems(res.data);
+	// 	});
+	// 	axios.get('https://6422645e86992901b2c711ab.mockapi.io/cart').then(res => {
+	// 		setCartItems(res.data);
+	// 	});
+	// }, []);
 	React.useEffect(() => {
-		// отправь запрос на бэк преврати в json и верни его из переменной и передай в юз стэйт в айтемс и ниже айтемс рендери
-		fetch(' https://6422645e86992901b2c711ab.mockapi.io/react-magazine')
-			.then((res) => {
-				return res.json();
-			})
-			.then((json) => {
-				setItems(json);
-			});
+		async function fetchData() {
+			try {
+				const [itemsRes, cartRes] = await Promise.all([
+					axios.get('https://6422645e86992901b2c711ab.mockapi.io/tems'),
+					axios.get('https://6422645e86992901b2c711ab.mockapi.io/cart'),
+				]);
+				setItems(itemsRes.data);
+				setCartItems(cartRes.data);
+			} catch (error) {
+				console.error(error);
+			}
+		}
+		fetchData();
 	}, []);
 
 	const filteredItems = items.filter((item) =>
@@ -29,15 +43,22 @@ function App() {
 	);
 
 	const onAddToCart = (obj) => {
+		axios.post('https://6422645e86992901b2c711ab.mockapi.io/cart', obj);
 		// к стаым данным добавляю новый объект, чтобы избежать муации данных
 		// setCartItems([...cartItems,  obj]);
 		// созадй новый массив, возми предЪидущие данные, добавь объект верни новый массив и сохрани его в cartItems(эта функция не сохраняется там)
 		setCartItems((prev) => [...prev, obj]);
 	};
 
+	const onRemoveCartItem = (id) => {
+		// axios.delete(`https://6422645e86992901b2c711ab.mockapi.io/cart/${id}`);
+		// возьми пред данные в cartItems и отфльтруй тот id, который передал
+		setCartItems((prev) => prev.filter((item) => item.id !== id));
+	}
+
 	function renderDrawer() {
 		if (cartOpened) {
-			return <Drawer items={cartItems} onClose={() => setCartOpened(false)} />;
+			return <Drawer items={cartItems} onClose={() => setCartOpened(false)} onRemove={onRemoveCartItem} />;
 		}
 		return null;
 	}

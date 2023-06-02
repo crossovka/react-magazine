@@ -1,6 +1,6 @@
 import './Drawer.scss';
 
-function Overlay( {onClose, items=[] } ) {
+function Overlay( { items=[], onClose, onRemove } ) {
 	return (
 		<div className="overlay">
 			<div className="overlay__drawer">
@@ -25,6 +25,8 @@ function Overlay( {onClose, items=[] } ) {
 							className="cart-item__remove"
 							src="/img/btn-remove.svg"
 							alt="убрать"
+							// если вдруг нужно передавать в метод какие-то данные, то нужно создавать анонимную функцию, иначе onRemove будет передаваться event
+							onClick={()=>onRemove(obj.id)}
 						/>
 					</div>
 				))}
