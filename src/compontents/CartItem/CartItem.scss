@@ -1,0 +1,21 @@
+// <div className="drawer__items">
+// 			{items.map((obj) => (
+// 				<div className="items__cart-item">
+// 					<div className="cart-item__img">
+// 						{/* style={{backgroundImage: `url(${obj.imageUrl})`}} */}
+// 						<img src={obj.imageUrl} alt="фото товара" />
+// 					</div>
+// 					<div className="cart-item__description">
+// 						<p>{obj.name}</p>
+// 						<b>{obj.price}</b>
+// 					</div>
+// 					<img
+// 						className="cart-item__remove"
+// 						src="/img/btn-remove.svg"
+// 						alt="убрать"
+// 						// если вдруг нужно передавать в метод какие-то данные, то нужно создавать анонимную функцию, иначе onRemove будет передаваться event
+// 						onClick={() => onRemove(obj.id)}
+// 					/>
+// 				</div>
+// 			))}
+// 		</div>
