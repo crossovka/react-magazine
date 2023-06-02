@@ -10,7 +10,6 @@ import './Card.scss';
 function Card( { imageUrl, name, price, onClickFavorite, onPlus  } ) {
 	const [isAdded, setIsAdded] = useState(false);
 
-
 	const addButtonImage = '/img/btn-plus.svg';
 	const checkedButtonImage = '/img/btn-cheked.svg';
 	
