@@ -108,7 +108,8 @@ function App() {
 										price={item.price}
 										imageUrl={item.imageUrl}
 										onClickFavorite={() =>
-											alert(item.name + ' Добавлены в избранное')
+											// alert(item.name + ' Добавлены в избранное')
+											console.log(item.name + ' Добавлены в избранное')
 										}
 										onPlus={(obj) => onAddToCart(obj)}
 									/>
